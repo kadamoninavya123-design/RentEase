@@ -19,42 +19,35 @@ const adminReturnRoutes = require("./routes/adminReturnRoutes");
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// ========================================
-// ROUTE DIAGNOSTICS
-// ========================================
-
-console.log("\n========== ROUTE CHECK ==========");
-
-console.log("authRoutes:", typeof authRoutes);
-console.log("rentalRoutes:", typeof rentalRoutes);
-console.log("adminRoutes:", typeof adminRoutes);
-console.log("maintenanceRoutes:", typeof maintenanceRoutes);
-console.log("adminMaintenanceRoutes:", typeof adminMaintenanceRoutes);
-console.log("damageClaimRoutes:", typeof damageClaimRoutes);
-console.log("adminDamageClaimRoutes:", typeof adminDamageClaimRoutes);
-console.log("adminReturnRoutes:", typeof adminReturnRoutes);
-
-console.log("=================================\n");
-
 // Middleware
 app.use(cors());
 app.use(express.json());
 
 // ========================================
-// API ROUTES
+// DATABASE CONNECTION
 // ========================================
 
-app.use("/api/auth", authRoutes);
-app.use("/api/rentals", rentalRoutes);
+let connectionPromise;
 
-app.use("/api/maintenance", maintenanceRoutes);
-app.use("/api/admin/maintenance", adminMaintenanceRoutes);
+async function connectDB() {
+  if (mongoose.connection.readyState === 1) {
+    return;
+  }
 
-app.use("/api/admin", adminRoutes);
+  if (!process.env.MONGO_URI) {
+    throw new Error("MONGO_URI is missing");
+  }
 
-app.use("/api/damage-claims", damageClaimRoutes);
-app.use("/api/admin/damage-claims", adminDamageClaimRoutes);
-app.use("/api/admin/returns", adminReturnRoutes);
+  if (!connectionPromise) {
+    connectionPromise = mongoose.connect(process.env.MONGO_URI)
+      .catch((error) => {
+        connectionPromise = null;
+        throw error;
+      });
+  }
+
+  await connectionPromise;
+}
 
 // ========================================
 // WELCOME ROUTE
@@ -83,6 +76,40 @@ app.get("/api/health", (req, res) => {
 });
 
 // ========================================
+// DATABASE MIDDLEWARE
+// ========================================
+
+app.use(async (req, res, next) => {
+  try {
+    await connectDB();
+    next();
+  } catch (error) {
+    console.error("Database connection error:", error.message);
+
+    res.status(500).json({
+      success: false,
+      message: "Database connection failed"
+    });
+  }
+});
+
+// ========================================
+// API ROUTES
+// ========================================
+
+app.use("/api/auth", authRoutes);
+app.use("/api/rentals", rentalRoutes);
+
+app.use("/api/maintenance", maintenanceRoutes);
+app.use("/api/admin/maintenance", adminMaintenanceRoutes);
+
+app.use("/api/admin", adminRoutes);
+
+app.use("/api/damage-claims", damageClaimRoutes);
+app.use("/api/admin/damage-claims", adminDamageClaimRoutes);
+app.use("/api/admin/returns", adminReturnRoutes);
+
+// ========================================
 // GET ALL AVAILABLE PRODUCTS
 // ========================================
 
@@ -93,7 +120,6 @@ app.get("/api/products", async (req, res) => {
     }).sort({ createdAt: 1 });
 
     res.status(200).json(products);
-
   } catch (error) {
     console.error("Error fetching products:", error.message);
 
@@ -105,35 +131,30 @@ app.get("/api/products", async (req, res) => {
 });
 
 // ========================================
-// START SERVER
+// LOCAL SERVER
 // ========================================
 
-async function startServer() {
-  try {
-    const mongoUri = process.env.MONGO_URI;
+if (!process.env.VERCEL) {
+  async function startServer() {
+    try {
+      await connectDB();
 
-    if (!mongoUri) {
-      throw new Error("MONGO_URI is missing from backend/.env");
+      app.listen(PORT, () => {
+        console.log(
+          `RentEase server running at http://localhost:${PORT}`
+        );
+      });
+    } catch (error) {
+      console.error("Startup error:", error.message);
+      process.exit(1);
     }
-
-    if (!process.env.JWT_SECRET) {
-      throw new Error("JWT_SECRET is missing from backend/.env");
-    }
-
-    await mongoose.connect(mongoUri);
-
-    console.log("MongoDB connected successfully");
-
-    app.listen(PORT, () => {
-      console.log(
-        `RentEase server running at http://localhost:${PORT}`
-      );
-    });
-
-  } catch (error) {
-    console.error("Startup error:", error);
-    process.exit(1);
   }
+
+  startServer();
 }
 
-startServer();
+// ========================================
+// EXPORT EXPRESS APP FOR VERCEL
+// ========================================
+
+module.exports = app;
