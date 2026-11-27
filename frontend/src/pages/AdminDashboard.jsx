@@ -5,7 +5,7 @@ import AdminMaintenanceManagement from "./AdminMaintenanceManagement";
 import AdminDamageClaimManagement from "./AdminDamageClaimManagement";
 import AdminReturnManagement from "../components/AdminReturnManagement";
 
-const API_URL = "http://localhost:5000/api/admin";
+const API_URL = "https://rent-ease-nine-coral.vercel.app/api/admin";
 
 const emptyProduct = {
   name: "",

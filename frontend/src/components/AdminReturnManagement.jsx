@@ -1,7 +1,7 @@
 
 import { useEffect, useState } from "react";
 
-const API_URL = "http://localhost:5000/api/admin/returns";
+const API_URL = "https://rent-ease-nine-coral.vercel.app/api/admin/returns";
 
 function AdminReturnManagement() {
   const [returns, setReturns] = useState([]);

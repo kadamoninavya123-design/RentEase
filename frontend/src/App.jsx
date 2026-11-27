@@ -12,8 +12,7 @@ import {
   getMyRentals,
   cancelRentalOrder
 } from "../services/rentalService";
-
-const API_URL = "http://localhost:5000/api/products";
+const API_URL = "https://rent-ease-nine-coral.vercel.app/api/products";
 
 function getSavedUser() {
   try {

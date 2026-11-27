@@ -1,5 +1,4 @@
-
-const API_URL = "http://localhost:5000/api/damage-claims";
+const API_URL = "https://rent-ease-nine-coral.vercel.app/api/damage-claims";
 
 // Get authentication token
 function getAuthHeaders() {
@@ -51,3 +50,6 @@ export const getMyDamageClaims = async () => {
 
   return data;
 };
+
+
+

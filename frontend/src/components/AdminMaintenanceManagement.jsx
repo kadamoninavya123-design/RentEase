@@ -1,7 +1,7 @@
 
 import { useEffect, useState } from "react";
 
-const API_URL = "http://localhost:5000/api/admin/maintenance";
+const API_URL = "https://rent-ease-nine-coral.vercel.app/api/admin/maintenance";
 
 function AdminMaintenanceManagement() {
   const [requests, setRequests] = useState([]);

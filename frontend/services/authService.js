@@ -1,5 +1,4 @@
-
-const API_URL = "http://localhost:5000/api/auth";
+const API_URL = "https://rent-ease-nine-coral.vercel.app/api/auth";
 
 export const registerUser = async (userData) => {
   const response = await fetch(`${API_URL}/register`, {
@@ -14,7 +13,7 @@ export const registerUser = async (userData) => {
 
   if (!contentType || !contentType.includes("application/json")) {
     throw new Error(
-      "Backend did not return JSON. Check whether the backend is running on port 5000."
+      "Backend did not return JSON. Please check the deployed backend."
     );
   }
 
@@ -40,7 +39,7 @@ export const loginUser = async (credentials) => {
 
   if (!contentType || !contentType.includes("application/json")) {
     throw new Error(
-      "Backend did not return JSON. Check whether the backend is running on port 5000."
+      "Backend did not return JSON. Please check the deployed backend."
     );
   }
 

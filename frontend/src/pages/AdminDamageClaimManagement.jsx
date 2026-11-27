@@ -1,7 +1,7 @@
 
 import { useEffect, useState } from "react";
 
-const API_URL = "http://localhost:5000/api/admin/damage-claims";
+const API_URL = "https://rent-ease-nine-coral.vercel.app/api/admin/damage-claims";
 
 const STATUS_OPTIONS = [
   "Pending",

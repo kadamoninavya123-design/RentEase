@@ -1,5 +1,4 @@
-
-const API_URL = "http://localhost:5000/api/rentals";
+const API_URL = "https://rent-ease-nine-coral.vercel.app/api/rentals";
 
 // Get authentication token
 function getAuthHeaders() {
@@ -47,6 +46,8 @@ export const getMyRentals = async () => {
 
   return data;
 };
+
+// Cancel a rental order
 export const cancelRentalOrder = async (rentalId) => {
   const response = await fetch(`${API_URL}/${rentalId}/cancel`, {
     method: "PATCH",

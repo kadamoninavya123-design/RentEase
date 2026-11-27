@@ -1,7 +1,7 @@
 
 import { useState } from "react";
 
-const API_URL = "http://localhost:5000/api/admin";
+const API_URL = "https://rent-ease-nine-coral.vercel.app/api/admin";
 
 function DeliveryPickupManagement({ rentals = [], onRefresh }) {
   const [loadingId, setLoadingId] = useState(null);

@@ -1,5 +1,4 @@
-
-const API_URL = "http://localhost:5000/api/maintenance";
+const API_URL = "https://rent-ease-nine-coral.vercel.app/api/maintenance";
 
 // Get authentication token
 function getAuthHeaders() {
