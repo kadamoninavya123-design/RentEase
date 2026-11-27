@@ -1,19 +1,103 @@
-# React + Vite
+# RentEase – Furniture & Appliance Rental Platform
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+<p align="center">
+  <strong>A full-stack web application for renting furniture and home appliances.</strong>
+</p>
 
-Currently, two official plugins are available:
+## 🌐 Live Demo
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+**Live Website:** https://rent-ease-32ec.vercel.app
 
-## React Compiler
+**GitHub Repository:** https://github.com/kadamoninavya123-design/RentEase
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+---
 
-Note: This will impact Vite dev & build performances.
-You can also try [the experimental native React Compiler support in plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md#rust-react-compiler) by using `compiler: true` in the plugin options instead of using the Babel plugin.
+## 📌 About the Project
 
-## Expanding the Oxlint configuration
+RentEase is a full-stack furniture and appliance rental platform designed to help customers rent products conveniently. The application provides product browsing, rental management, customer functionality, and administrative management through dedicated dashboards.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+The project is built using React, Node.js, Express.js, and MongoDB.
+
+## ✨ Features
+
+### 👤 Customer
+- Browse available rental products.
+- View product details.
+- Add products to the cart.
+- Calculate rental costs.
+- Checkout validation.
+- Manage rental activities.
+
+### 🛠️ Admin
+- Admin dashboard.
+- Manage customers.
+- Manage rental products.
+- Manage rentals.
+- Manage deliveries and pickups.
+- Handle returns.
+- Manage maintenance requests.
+- Manage damage claims.
+
+### 📦 Rental Management
+- Rental tracking and management.
+- Product availability management.
+- Return management.
+- Maintenance request handling.
+- Damage claim management.
+
+## 💻 Tech Stack
+
+| Technology | Purpose |
+|---|---|
+| React | Frontend development |
+| Vite | Frontend build tool |
+| Node.js | Backend runtime |
+| Express.js | REST API development |
+| MongoDB | Database |
+| Mongoose | Database modelling |
+| JavaScript | Application development |
+| Git & GitHub | Version control |
+| Vercel | Deployment |
+
+## 🏗️ Project Structure
+
+```text
+RentEase/
+├── backend/
+│   ├── models/
+│   ├── routes/
+│   ├── middleware/
+│   ├── server.js
+│   └── package.json
+├── frontend/
+│   ├── src/
+│   ├── public/
+│   ├── package.json
+│   └── vite.config.js
+├── .gitignore
+└── README.md
+```
+
+## 🚀 Deployment
+
+- Frontend: Vercel
+- Backend API: Vercel
+- Database: MongoDB
+
+## 📖 Learning Outcomes
+
+- Full-stack application development.
+- REST API integration.
+- MongoDB database management.
+- Authentication and application workflows.
+- Frontend and backend integration.
+- Deployment and debugging.
+- Version control using Git and GitHub.
+
+## 👩‍💻 Developer
+
+Developed as a full-stack project to gain practical experience in web application development.
+
+---
+
+**RentEase – Making furniture and appliance rentals easier.**
